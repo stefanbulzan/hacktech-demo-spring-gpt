@@ -1,4 +1,1 @@
-### GET request to example server
-GET http://localhost:8080/faq?message="what are the ideas around sustainable development?"
-###
-GET http://localhost:8080/faq?message="what time did Eve mentioned the suppliers of eco friendly materials in Cluj?"
+GET http://localhost:8080/knowledge?question="who is Jennifer Martinez?"

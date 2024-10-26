@@ -23,10 +23,10 @@ public class HackTechConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(HackTechConfiguration.class);
 
-    @Value("vectorstore-hack-tech.json")
+    @Value("vectorstore-digetron.json")
     private String vectorStoreName;
 
-    @Value("classpath:/docs/hacktech-data.json")
+    @Value("classpath:/docs/digetron-1.json")
     private Resource hackTechData;
 
     @Bean
@@ -39,7 +39,7 @@ public class HackTechConfiguration {
         } else {
             log.info("Vector Store File Does Not Exist, loading documents");
             TextReader textReader = new TextReader(hackTechData);
-            textReader.getCustomMetadata().put("filename", "hacktech-data.json");
+            textReader.getCustomMetadata().put("filename", "digetron-1.json");
             List<Document> documents = textReader.get();
             TextSplitter textSplitter = new TokenTextSplitter();
             List<Document> splitDocuments = textSplitter.apply(documents);

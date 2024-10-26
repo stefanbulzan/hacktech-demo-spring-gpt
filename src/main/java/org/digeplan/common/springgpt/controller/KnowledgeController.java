@@ -59,7 +59,7 @@ class KnowledgeController {
 
     }
 
-    record KnowledgeRequest(String question) {
+    record KnowledgeRequest(String question, String name) {
     }
 }
 
