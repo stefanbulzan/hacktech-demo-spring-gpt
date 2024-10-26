@@ -1,7 +1,8 @@
-package org.digeplan.common.springgpt;
+package org.digeplan.common.springgpt.controller;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
+import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,8 +30,12 @@ class KnowledgeController {
 
     @GetMapping("/knowledge")
     String getKnowledge(KnowledgeRequest request) {
+        OpenAiChatOptions options = OpenAiChatOptions.builder()
+                .withFunction("userOutOfOffice")
+                .build();
         return chatClient.prompt()
                 .user(request.question())
+                .options(options)
                 .call()
                 .content();
     }

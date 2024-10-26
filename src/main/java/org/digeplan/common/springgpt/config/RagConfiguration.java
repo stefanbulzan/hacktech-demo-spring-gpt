@@ -1,4 +1,4 @@
-package org.digeplan.common.springgpt;
+package org.digeplan.common.springgpt.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +11,7 @@ import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
 
 import java.io.File;
@@ -20,15 +21,16 @@ import java.nio.file.Paths;
 import java.util.List;
 
 @Configuration
-public class HackTechConfiguration {
+@Profile("olimpics")
+public class RagConfiguration {
     
-    private static final Logger log = LoggerFactory.getLogger(HackTechConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(RagConfiguration.class);
 
-    @Value("vectorstore-hack-tech.json")
+    @Value("vectorstore.json")
     private String vectorStoreName;
 
-    @Value("classpath:/docs/hacktech-data.json")
-    private Resource hackTechData;
+    @Value("classpath:/docs/olympic-faq.txt")
+    private Resource faq;
 
     @Bean
     SimpleVectorStore simpleVectorStore(EmbeddingModel embeddingModel) throws IOException {
@@ -39,8 +41,8 @@ public class HackTechConfiguration {
             simpleVectorStore.load(vectorStoreFile);
         } else {
             log.info("Vector Store File Does Not Exist, loading documents");
-            TextReader textReader = new TextReader(hackTechData);
-            textReader.getCustomMetadata().put("filename", "hacktech-data.json");
+            TextReader textReader = new TextReader(faq);
+            textReader.getCustomMetadata().put("filename", "olympic-faq.txt");
             List<Document> documents = textReader.get();
             TextSplitter textSplitter = new TokenTextSplitter();
             List<Document> splitDocuments = textSplitter.apply(documents);

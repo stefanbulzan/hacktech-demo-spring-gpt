@@ -1,4 +1,4 @@
 ### GET request to example server
-GET http://localhost:8080/openapi
+GET http://localhost:8080/knowledge?question="Give me the titles of the meetings that were when I was out of office?"
 
 ###

@@ -1,4 +1,4 @@
-package org.digeplan.common.springgpt;
+package org.digeplan.common.springgpt.controller;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.messages.UserMessage;

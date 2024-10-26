@@ -1,4 +1,4 @@
-package org.digeplan.common.springgpt;
+package org.digeplan.common.springgpt.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,29 +11,26 @@ import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
 @Configuration
-@Profile("olimpics")
-public class RagConfiguration {
-    
-    private static final Logger log = LoggerFactory.getLogger(RagConfiguration.class);
+public class HackTechConfiguration {
 
-    @Value("vectorstore.json")
+    private static final Logger log = LoggerFactory.getLogger(HackTechConfiguration.class);
+
+    @Value("vectorstore-hack-tech.json")
     private String vectorStoreName;
 
-    @Value("classpath:/docs/olympic-faq.txt")
-    private Resource faq;
+    @Value("classpath:/docs/hacktech-data.json")
+    private Resource hackTechData;
 
     @Bean
-    SimpleVectorStore simpleVectorStore(EmbeddingModel embeddingModel) throws IOException {
+    SimpleVectorStore simpleVectorStore(EmbeddingModel embeddingModel) {
         var simpleVectorStore = new SimpleVectorStore(embeddingModel);
         var vectorStoreFile = getVectorStoreFile();
         if (vectorStoreFile.exists()) {
@@ -41,8 +38,8 @@ public class RagConfiguration {
             simpleVectorStore.load(vectorStoreFile);
         } else {
             log.info("Vector Store File Does Not Exist, loading documents");
-            TextReader textReader = new TextReader(faq);
-            textReader.getCustomMetadata().put("filename", "olympic-faq.txt");
+            TextReader textReader = new TextReader(hackTechData);
+            textReader.getCustomMetadata().put("filename", "hacktech-data.json");
             List<Document> documents = textReader.get();
             TextSplitter textSplitter = new TokenTextSplitter();
             List<Document> splitDocuments = textSplitter.apply(documents);
