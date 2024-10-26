@@ -20,7 +20,7 @@ public class OpenAiController {
 
     @GetMapping
     public String tellAJoke() {
-        return chatClient.prompt(new Prompt(List.of(new UserMessage("Tell me a joke"))))
+        return chatClient.prompt(new Prompt(List.of(new UserMessage("Tell me a dark joke about programmers"))))
                 .call()
                 .content();
     }
