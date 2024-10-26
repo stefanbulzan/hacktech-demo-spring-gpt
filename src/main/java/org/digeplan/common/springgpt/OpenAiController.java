@@ -6,6 +6,7 @@ import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 
 import java.util.List;
 
@@ -22,6 +23,14 @@ public class OpenAiController {
     public String tellAJoke() {
         return chatClient.prompt(new Prompt(List.of(new UserMessage("Tell me a joke"))))
                 .call()
+                .content();
+    }
+
+    @GetMapping("stream")
+    public Flux<String> tellAJokeStream() {
+        return chatClient.prompt()
+                .user("Tell me a joke")
+                .stream()
                 .content();
     }
 }
