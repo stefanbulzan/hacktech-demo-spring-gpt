@@ -10,13 +10,17 @@ import org.springframework.stereotype.Service;
 public class PromptService {
     private final Resource digetonPrompt;
     private final Resource oooPrompt;
+    private final Resource oooDetailsPrompt;
 
     public PromptService(@Value("classpath:/prompts/digeton-prompt.txt")
                          Resource digetonPrompt,
                          @Value("classpath:/prompts/ooo-prompt.txt")
-                         Resource oooPrompt) {
+                         Resource oooPrompt,
+                         @Value("classpath:/prompts/ooo-details-prompt.txt")
+                         Resource oooDetailsPrompt) {
         this.digetonPrompt = digetonPrompt;
         this.oooPrompt = oooPrompt;
+        this.oooDetailsPrompt = oooDetailsPrompt;
     }
 
     public DigetonPrompt knowledgePrompt() {
@@ -27,5 +31,9 @@ public class PromptService {
 
     public DigetonPrompt oooPrompt() {
         return new DigetonPrompt(oooPrompt);
+    }
+
+    public DigetonPrompt oooDetailsPrompt() {
+        return new DigetonPrompt(oooDetailsPrompt);
     }
 }

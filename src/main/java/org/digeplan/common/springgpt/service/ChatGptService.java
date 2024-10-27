@@ -52,4 +52,15 @@ public class ChatGptService {
                 .call()
                 .content();
     }
+
+    public String oooDetails(String user) {
+        DigetonPrompt digetonPrompt = promptService.oooDetailsPrompt();
+        return chatClient.prompt()
+                .user(u -> {
+                    u.text(digetonPrompt.prompt());
+                    u.param("user", user);
+                })
+                .call()
+                .content();
+    }
 }

@@ -1,0 +1,5 @@
+Users usually send an out of office email. They specify in the email body the time interval they will not be available.
+Both start and end date are inclusive, so they won't be available in neither of days. In the email text you will find the person that will replace them.
+Respond with a json with startDate, endDate, replacement and summary. Don't put ```json and ```.
+
+Given this information,when was {user} out of office?
