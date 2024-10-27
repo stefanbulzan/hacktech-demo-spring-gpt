@@ -37,5 +37,6 @@ public class HackTechAtlasConfiguration {
         TextSplitter textSplitter = new TokenTextSplitter();
         List<Document> splitDocuments = textSplitter.apply(documents);
         vectorStore.add(splitDocuments);
+        log.info("Loaded {} documents", splitDocuments.size());
     }
 }

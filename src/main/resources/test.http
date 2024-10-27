@@ -1,4 +1,4 @@
 ### GET request to example server
-GET http://localhost:8080/knowledge?question="Give me the titles of the meetings that were when I was out of office?"
+GET http://localhost:8080/knowledge?question="When was Emily Thompson out of office?"
 
 ###

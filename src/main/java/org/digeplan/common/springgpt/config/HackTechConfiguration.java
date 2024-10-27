@@ -1,7 +1,6 @@
 package org.digeplan.common.springgpt.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.reader.TextReader;
@@ -19,12 +18,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+@Slf4j
 @Configuration
 @Profile("simple-vector")
 public class HackTechConfiguration {
-
-    private static final Logger log = LoggerFactory.getLogger(HackTechConfiguration.class);
-
     @Value("vectorstore-digetron.json")
     private String vectorStoreName;
 
@@ -56,5 +53,4 @@ public class HackTechConfiguration {
         String absolutePath = path.toFile().getAbsolutePath() + "/" + vectorStoreName;
         return new File(absolutePath);
     }
-
 }

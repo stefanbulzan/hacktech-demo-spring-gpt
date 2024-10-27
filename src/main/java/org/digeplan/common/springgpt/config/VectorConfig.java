@@ -16,24 +16,17 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 @SpringBootConfiguration
 @EnableAutoConfiguration
 public class VectorConfig {
+    private final String openAiKey;
+    private final Boolean initSchema;
 
-    @Value("${spring.ai.openai.api-key}")
-    private String openAiKey;
-
-    @Value("${spring.data.mongodb.database}")
-    private String databaseName;
-
-    @Value("${spring.ai.vectorstore.mongodb.collection-name:vector_store}")
-    private String collectionName;
-
-    @Value("${spring.ai.vectorstore.mongodb.indexName:vector_index}")
-    private String indexName;
-
-    @Value("${spring.data.mongodb.uri}")
-    private String mongoUri;
-
-    @Value("${spring.ai.vectorstore.mongodb.initialize-schema}")
-    private Boolean initSchema;
+    public VectorConfig(
+            @Value("${spring.ai.openai.api-key}")
+            String openAiKey,
+            @Value("${spring.ai.vectorstore.mongodb.initialize-schema}")
+            Boolean initSchema) {
+        this.openAiKey = openAiKey;
+        this.initSchema = initSchema;
+    }
 
     @Bean
     public EmbeddingModel embeddingModel() {
