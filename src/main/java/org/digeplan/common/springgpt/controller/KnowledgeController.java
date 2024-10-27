@@ -28,4 +28,9 @@ class KnowledgeController {
     OOODetails getOOO(@RequestParam String name) {
         return oooService.oooDetails(name);
     }
+
+    @GetMapping("/knowledge/ooo/summary")
+    String getOOOSummary(@RequestParam String name) {
+        return oooService.oooSummary(name);
+    }
 }

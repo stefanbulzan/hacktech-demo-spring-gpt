@@ -63,4 +63,15 @@ public class ChatGptService {
                 .call()
                 .content();
     }
+
+    public String oooSummary(String user) {
+        DigetonPrompt digetonPrompt = promptService.oooSummaryPrompt();
+        return chatClient.prompt()
+                .user(u -> {
+                    u.text(digetonPrompt.prompt());
+                    u.param("user", user);
+                })
+                .call()
+                .content();
+    }
 }

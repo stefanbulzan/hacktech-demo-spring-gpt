@@ -1,0 +1,7 @@
+Users usually send an out of office email. They specify in the email body the time interval they will not be available.
+Both start and end date are inclusive, so they won't be available in neither of days.
+Respond with a json with startDate, endDate. Don't put ```json and ```.
+
+Using startDate and endDate, retrieve all communications of any type from that period and make a nice summary with each meeting on a new line numbered.
+The list will start with SUMMARY:
+Also attach a description about all topics discussed in the found meetings

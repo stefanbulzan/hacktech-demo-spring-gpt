@@ -16,4 +16,8 @@ public class OOOService {
     public OOODetails oooDetails(String user) {
         return objectMapper.readValue(chatGptService.oooDetails(user), OOODetails.class);
     }
+
+    public String oooSummary(String user) {
+        return chatGptService.oooSummary(user);
+    }
 }

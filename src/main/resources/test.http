@@ -12,4 +12,7 @@ GET http://localhost:8080/knowledge?question="What is my name?"
 ###
 GET http://localhost:8080/knowledge/ooo?name="Robert Taylor"
 
+###
+GET http://localhost:8080/knowledge/ooo/summary?name="Robert Taylor"
+
 

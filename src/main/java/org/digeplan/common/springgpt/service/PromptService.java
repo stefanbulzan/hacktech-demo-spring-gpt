@@ -11,16 +11,20 @@ public class PromptService {
     private final Resource digetonPrompt;
     private final Resource oooPrompt;
     private final Resource oooDetailsPrompt;
+    private final Resource oooSummaryPrompt;
 
     public PromptService(@Value("classpath:/prompts/digeton-prompt.txt")
                          Resource digetonPrompt,
                          @Value("classpath:/prompts/ooo-prompt.txt")
                          Resource oooPrompt,
                          @Value("classpath:/prompts/ooo-details-prompt.txt")
-                         Resource oooDetailsPrompt) {
+                         Resource oooDetailsPrompt,
+                         @Value("classpath:/prompts/ooo-summary-prompt.txt")
+                         Resource oooSummaryPrompt) {
         this.digetonPrompt = digetonPrompt;
         this.oooPrompt = oooPrompt;
         this.oooDetailsPrompt = oooDetailsPrompt;
+        this.oooSummaryPrompt = oooSummaryPrompt;
     }
 
     public DigetonPrompt knowledgePrompt() {
@@ -35,5 +39,9 @@ public class PromptService {
 
     public DigetonPrompt oooDetailsPrompt() {
         return new DigetonPrompt(oooDetailsPrompt);
+    }
+
+    public DigetonPrompt oooSummaryPrompt() {
+        return new DigetonPrompt(oooSummaryPrompt);
     }
 }
