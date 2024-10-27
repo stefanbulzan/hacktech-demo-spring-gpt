@@ -1,6 +1,7 @@
 package org.digeplan.common.springgpt.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.digeplan.common.springgpt.controller.filter.MeetingFilter;
 import org.digeplan.common.springgpt.model.Meeting;
 import org.digeplan.common.springgpt.service.MeetingService;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +15,8 @@ public class MeetingController {
     private final MeetingService service;
 
     @GetMapping
-    public List<Meeting> getMeetings() {
-        return service.findAll();
+    public List<Meeting> getMeetings(MeetingFilter filter) {
+        return service.findAll(filter);
     }
 
     @GetMapping("{id}")

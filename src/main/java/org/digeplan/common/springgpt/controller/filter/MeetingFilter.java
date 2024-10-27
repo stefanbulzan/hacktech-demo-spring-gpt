@@ -6,6 +6,7 @@ import lombok.With;
 @With
 @Builder
 public record MeetingFilter(
-        String id
+        String id,
+        String title
 ) {
 }

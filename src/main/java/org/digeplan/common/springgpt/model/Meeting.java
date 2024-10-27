@@ -2,6 +2,7 @@ package org.digeplan.common.springgpt.model;
 
 import lombok.Builder;
 import lombok.With;
+import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ import java.util.List;
 @Document("meetings")
 public record Meeting(
         String id,
+        @TextIndexed
         String title,
         LocalDateTime date,
         String duration,
