@@ -22,7 +22,6 @@ public class MongoTextIndexConfig {
                 .named("meeting_title_text_index")
                 .build();
 
-        // Ensure the text index exists
         mongoTemplate.indexOps(Meeting.class).ensureIndex(textIndex);
     }
 }

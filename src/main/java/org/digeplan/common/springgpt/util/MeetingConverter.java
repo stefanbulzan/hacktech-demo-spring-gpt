@@ -29,21 +29,4 @@ public class MeetingConverter {
             throw new RuntimeException("Error converting JSON to meetings", e);
         }
     }
-
-    public Meeting convertJsonToMeeting(String json) {
-        try {
-            Meeting meeting = objectMapper.readValue(json, Meeting.class);
-            return meeting.withId(UUID.randomUUID().toString());
-        } catch (Exception e) {
-            throw new RuntimeException("Error converting JSON to meeting", e);
-        }
-    }
-
-    public String convertMeetingToJson(Meeting meeting) {
-        try {
-            return objectMapper.writeValueAsString(meeting);
-        } catch (Exception e) {
-            throw new RuntimeException("Error converting meeting to JSON", e);
-        }
-    }
 }

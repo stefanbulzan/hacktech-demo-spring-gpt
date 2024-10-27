@@ -10,9 +10,12 @@ GET http://localhost:8080/knowledge?question="My name is Stefan"
 GET http://localhost:8080/knowledge?question="What is my name?"
 
 ###
-GET http://localhost:8080/knowledge/ooo?name="Robert Taylor"
+GET http://localhost:8080/knowledge/ooo?name="Emily Thompson"
 
 ###
-GET http://localhost:8080/knowledge/ooo/summary?name="Robert Taylor"
+GET http://localhost:8080/knowledge/ooo/summary?name="Emily Thompson"
+
+###
+GET https://hacktech.local.lt/knowledge/ooo/summary?name="James Wilson"
 
 
