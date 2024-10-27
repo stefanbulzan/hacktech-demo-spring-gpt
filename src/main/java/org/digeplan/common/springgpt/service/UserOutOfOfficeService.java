@@ -1,22 +1,29 @@
 package org.digeplan.common.springgpt.service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Description;
+import org.springframework.stereotype.Component;
 
 import java.util.function.Function;
 
 @Slf4j
-
-public class UserOutOfOfficeService implements Function<UserOutOfOfficeService.Request, UserOutOfOfficeService.Response> {
+@Description("Get user out of office date")
+@Component
+@RequiredArgsConstructor
+public class UserOutOfOfficeService implements Function<UserOutOfOfficeService.OOORequest, UserOutOfOfficeService.OOOResponse> {
+    private final ChatGptService chatGptService;
 
     @Override
-    public UserOutOfOfficeService.Response apply(UserOutOfOfficeService.Request s) {
-        log.info("Get out of office date");
-        return new Response("The current user was out of office from 2024-10-22T13:00:00 until 2024-10-24T13:00:00");
+    public OOOResponse apply(OOORequest s) {
+        log.info("Calling OOO Service for user: {}", s.user());
+        return new OOOResponse(chatGptService.ooo(s.user()));
     }
 
-    public record Request(String user) {
+    public record OOORequest(String user) {
     }
 
-    public record Response(String outOfOffice) {
+    public record OOOResponse(String outOfOffice) {
     }
 }
+

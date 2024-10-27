@@ -1,12 +1,8 @@
 package org.digeplan.common.springgpt.controller;
 
-import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
-import org.springframework.ai.openai.OpenAiChatOptions;
-import org.springframework.ai.vectorstore.SearchRequest;
-import org.springframework.ai.vectorstore.VectorStore;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
+import lombok.RequiredArgsConstructor;
+import org.digeplan.common.springgpt.model.KnowledgeRequest;
+import org.digeplan.common.springgpt.service.ChatGptService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,43 +10,17 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
 @RestController
+@RequiredArgsConstructor
 class KnowledgeController {
-
-    private final ChatClient chatClient;
-    @Value("classpath:/prompts/digeton-prompt.txt")
-    private Resource promptText;
-
-    public KnowledgeController(ChatClient.Builder builder, VectorStore vectorStore) {
-        this.chatClient = builder
-                .defaultAdvisors(new QuestionAnswerAdvisor(vectorStore, SearchRequest.defaults()))
-                .build();
-    }
+    private final ChatGptService chatGptService;
 
     @GetMapping("/knowledge")
-    String getKnowledge(KnowledgeRequest request) {
-        OpenAiChatOptions options = OpenAiChatOptions.builder()
-                .withFunction("userOutOfOffice")
-                .build();
-        return chatClient.prompt()
-                .user(request.question())
-                .options(options)
-                .call()
-                .content();
+    Flux<String> getKnowledge(KnowledgeRequest request) {
+        return chatGptService.knowledge(request);
     }
 
     @PostMapping("/knowledge")
     Flux<String> getKnowledgePost(@RequestBody KnowledgeRequest request) {
-        return chatClient.prompt()
-                .user(u -> {
-                    u.text(promptText);
-                    u.param("question", request.question);
-                })
-                .stream()
-                .content();
-    }
-
-    record KnowledgeRequest(String question, String name) {
+        return chatGptService.knowledge(request);
     }
 }
-
-
