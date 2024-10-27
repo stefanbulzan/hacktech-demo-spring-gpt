@@ -17,7 +17,9 @@ public class UserOutOfOfficeService implements Function<UserOutOfOfficeService.O
     @Override
     public OOOResponse apply(OOORequest s) {
         log.info("Calling OOO Service for user: {}", s.user());
-        return new OOOResponse(chatGptService.ooo(s.user()));
+        OOOResponse oooResponse = new OOOResponse(chatGptService.ooo(s.user()));
+        log.info("response: {}", oooResponse.outOfOffice);
+        return oooResponse;
     }
 
     public record OOORequest(String user) {
