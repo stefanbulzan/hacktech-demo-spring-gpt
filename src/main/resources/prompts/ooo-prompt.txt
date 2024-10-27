@@ -1,1 +1,4 @@
-When was {user} out of office?
+Users usually send an out of office email. They specify in the email body the time interval they will not be available.
+Both start and end date are inclusive, so they won't be available in neither of days.
+Respond with a time interval as a string, no references required.
+Given this information,when was {user} out of office?

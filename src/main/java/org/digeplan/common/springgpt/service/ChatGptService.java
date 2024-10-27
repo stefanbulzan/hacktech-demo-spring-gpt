@@ -3,7 +3,9 @@ package org.digeplan.common.springgpt.service;
 import org.digeplan.common.springgpt.model.DigetonPrompt;
 import org.digeplan.common.springgpt.model.KnowledgeRequest;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
+import org.springframework.ai.chat.memory.InMemoryChatMemory;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.stereotype.Service;
@@ -20,7 +22,9 @@ public class ChatGptService {
             VectorStore vectorStore,
             PromptService promptService) {
         this.chatClient = builder
-                .defaultAdvisors(new QuestionAnswerAdvisor(vectorStore, SearchRequest.defaults()))
+                .defaultAdvisors(
+                        new MessageChatMemoryAdvisor(new InMemoryChatMemory()),
+                        new QuestionAnswerAdvisor(vectorStore, SearchRequest.defaults()))
                 .build();
         this.promptService = promptService;
     }

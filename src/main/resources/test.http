@@ -1,4 +1,12 @@
 ### GET request to example server
 GET http://localhost:8080/knowledge?question="When was Emily Thompson out of office?"
+###
+GET http://localhost:8080/knowledge?question="What happened in the company while Emily Thompson was out of office?"
 
 ###
+GET http://localhost:8080/knowledge?question="My name is Stefan"
+
+###
+GET http://localhost:8080/knowledge?question="What is my name?"
+
+
