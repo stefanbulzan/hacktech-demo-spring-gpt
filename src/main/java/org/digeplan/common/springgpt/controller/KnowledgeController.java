@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
-import java.util.List;
-
 @RestController
 class KnowledgeController {
 
@@ -49,14 +47,6 @@ class KnowledgeController {
                 })
                 .stream()
                 .content();
-    }
-
-    private ResponseWithRefs convertToRefs(String response) {
-        return new ResponseWithRefs(response, List.of("ref1", "ref2"));
-    }
-
-    record ResponseWithRefs(String content, List<String> refs) {
-
     }
 
     record KnowledgeRequest(String question, String name) {
